@@ -17,7 +17,17 @@
 
 ## Help
 
-There is a config.ini file where settings are stored. Using command line arguments will override the config.ini file. However, if any of the toggles are set to True in the config.ini, they will be true regardless of whether a toggle argument is set.
+To run using only config.ini settings:
+
+`python3 pdf_batch_crop.py`
+
+To run using command line args for example:
+
+`python3 pdf_batch_crop.py -v -r -d /home/user/directory`
+
+A single input filename can be used or a whole input directory, or both.
+
+There is a config.ini file where settings are stored. Using command line arguments will override the config.ini file. However, if any of the toggles are set to True in the config.ini, they will be true regardless of whether a toggle command line argument is set.
 
 ### Arguments:
 - -h, --help **(show this help message and exit)**
@@ -42,10 +52,6 @@ Either set the coordinates in the config.ini file, or by command line by using t
 -b 1 2 3 4
 
 This has to be set using trial and error for now. Read PyPDF2 documentation for more information.
-
-## Run
-
-`python3 pdf_batch_crop.py`
 
 ## Requirements
 
