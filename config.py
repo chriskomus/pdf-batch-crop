@@ -112,6 +112,11 @@ class Config:
         Sets the directory of pdfs that will be processed
         :param new_directory: The directory of pdfs that will be processed
         """
+        # Even though the final / is needed, adding it in the ini seems to cause a glitch on MacOS.
+        # So here it's removed, then added again.
+        if new_directory.endswith('/'):
+            new_directory = new_directory[:-1]
+
         p = Path(new_directory)
         if p.exists() and p.is_dir():
             if not new_directory.endswith('/'):
