@@ -19,14 +19,7 @@
 
 There is a config.ini file where settings are stored. Using command line arguments will override the config.ini file. However, if any of the toggles are set to True in the config.ini, they will be true regardless of whether a toggle argument is set.
 
-## Setting the Bounding Box
-
-Either set the coordinates in the config.ini file, or by command line by using the -b toggle and then exactly 4 numbers separated by a single space:
--b 1 2 3 4
-
-This has to be set using trial and error for now. Read PyPDF2 documentation for more information.
-
-#### Arguments:
+### Arguments:
 - -h, --help **(show this help message and exit)**
 - -i INPUT_FILENAME **(Input filename of single PDF)**
 - -o OUTPUT_FILENAME **(Output filename of merged PDF)**
@@ -36,18 +29,25 @@ This has to be set using trial and error for now. Read PyPDF2 documentation for 
 - -x ARCHIVED_DIRECTORY **(Name of subdirectory for archive (NOTE: this is not an absolute path, just the name of a subdirectory))**
 - -b **(Bounding box [y0 y1 x0 x1])**
 
-#### toggles:
+### Toggles:
 - -v, --verbose         **(Verbose Mode)**
 - -m, --merge           **(Create merged file of all cropped PDFs)**
 - -a, --archive         **(Move processed PDFs into a sub-directory)**
 - -r, --rotate          **(Rotate all Portrait to Landscape)**
 - -c, --archive_by_month  **(Put archived PDFs in sub folders archived by date)**
 
-# Run
+## Setting the Bounding Box
+
+Either set the coordinates in the config.ini file, or by command line by using the -b toggle and then exactly 4 numbers separated by a single space:
+-b 1 2 3 4
+
+This has to be set using trial and error for now. Read PyPDF2 documentation for more information.
+
+## Run
 
 `python3 pdf_batch_crop.py`
 
-# Requirements
+## Requirements
 
 You will need PyPDF2:
 
