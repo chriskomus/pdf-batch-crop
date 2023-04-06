@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfWriter, PdfReader
 import re
 import datetime
 import os
@@ -38,7 +38,7 @@ class Pdf:
         """
         if new_filename:
             try:
-                self._filename = PdfFileReader(open(new_filename, "rb"))
+                self._filename = PdfReader(open(new_filename, "rb"))
             except OSError:
                 raise ValueError(f"Cannot find file: {self.file}")
         else:
@@ -50,38 +50,38 @@ class Pdf:
         :param file_suffix: The suffix added to the end of the new file.
         :return: A string of the new filename.
         """
-        processed_file = PdfFileWriter()
-        self.pages = self.file.getNumPages()
+        processed_file = PdfWriter()
+        self.pages = len(self.file.pages)
 
         for i in range(self.pages):
-            page = self.file.getPage(i)
+            page = self.file.pages[i]
 
             # Skip page if filtered text appears in that page.
             if self.filter_text:
-                text_result = page.extractText()
+                text_result = page.extract_text()
                 if re.search(self.filter_text, text_result):
                     continue
 
             # trim the PDF
-            page.trimBox.lowerLeft = (self.bounding_box[0], self.bounding_box[2])
-            page.trimBox.upperRight = (self.bounding_box[1], self.bounding_box[3])
-            page.cropBox.lowerLeft = (self.bounding_box[0], self.bounding_box[2])
-            page.cropBox.upperRight = (self.bounding_box[1], self.bounding_box[3])
+            page.trimbox.lower_left = (self.bounding_box[0], self.bounding_box[2])
+            page.trimbox.upper_right = (self.bounding_box[1], self.bounding_box[3])
+            page.cropbox.lower_left = (self.bounding_box[0], self.bounding_box[2])
+            page.cropbox.upper_right = (self.bounding_box[1], self.bounding_box[3])
 
             # If Portrait, rotate to Landscape
             if self.rotate:
-                if page.mediaBox.getUpperRight_x() - page.mediaBox.getUpperLeft_x() > \
-                        page.mediaBox.getUpperRight_y() - page.mediaBox.getLowerRight_y():
-                    page.rotateCounterClockwise(90)
+                if page.mediabox.right - page.mediabox.left > \
+                        page.mediabox.top - page.mediabox.bottom:
+                    page.rotate(90)
 
-            processed_file.addPage(page)
+            processed_file.add_page(page)
 
         # Create new file
         new_filename = self.filename.replace(".pdf", "-" + file_suffix + ".pdf")
         output_stream = open(new_filename, "wb")
 
         processed_file.write(output_stream)
-        self.new_pages = processed_file.getNumPages()
+        self.new_pages = len(processed_file.pages)
         output_stream.close()
 
         return new_filename

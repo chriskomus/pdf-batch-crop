@@ -4,7 +4,7 @@ import sys
 import time
 import functions
 
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 
 from config import Config
 from pdf import Pdf
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     if len(pdfs) != 0:
         # create PDF merger that will contain processed the PDFs
-        pdf_merger = PdfFileMerger()
+        pdf_merger = PdfMerger()
 
         # Process the pdfs, then merge (if option enabled) and archive.
         merged_pages = 0

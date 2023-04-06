@@ -1,0 +1,9 @@
+/.idea/modules.xml
+/run.bat
+/pdf_batch_crop_v2.iml
+/run.command
+/run.sh
+/test.pdf
+/.idea/vcs.xml
+.idea/
+__pycache__/
